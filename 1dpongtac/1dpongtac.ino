@@ -32,17 +32,17 @@ const int LOOSE_SOUND = 130;
     PARAMETRES DE BRANCHEMENTS
  ******************************/
 
-const int LED_PIN = 8;          // Numero de branchement de la bande de LEDs
-const int BUTTON1_PIN = 2;      // Numero de branchement du premier bouton
-const int BUTTON2_PIN = 3;      // Numero de branchement du deuxieme bouton
-const int HAUT_PARLEUR_PIN = 5; // Numero de branchement du haut parleur (optionnel)
+const int LED_PIN = D4;          // Numero de branchement de la bande de LEDs
+const int BUTTON1_PIN = D6;      // Numero de branchement du premier bouton
+const int BUTTON2_PIN = D5;      // Numero de branchement du deuxieme bouton
+const int HAUT_PARLEUR_PIN = D1; // Numero de branchement du haut parleur (optionnel)
 
 
 /***********************
     PARAMETRES GENERAUX
  ***********************/
-const int   NUM_LEDS = 40;            // Nombre de LEDs sur la bande
-const CRGB  PLAYER1_COLOR = VERT;     // Couleur player 1
+const int   NUM_LEDS = 59;            // Nombre de LEDs sur la bande
+const CRGB  PLAYER1_COLOR = BLEU;     // Couleur player 1
 const CRGB  PLAYER2_COLOR = ROUGE;    // Couleur player 2
 
 
@@ -54,7 +54,7 @@ const float ACCELERATION = 8;   // Accelleration de la balle a chaque tir, si AC
 const int   HIT_ZONE = 5;       // Nombre de LED pendant lesquelles on peut renvoyer la balle
 const int   MAX_SCORE = 3;
 
-const CRGB  BALL_COLOR = BLANC; // Couleur de la balle
+const CRGB  BALL_COLOR = JAUNE; // Couleur de la balle
 
 /*******************************
      PARAMETRES TIR A LA CORDE
