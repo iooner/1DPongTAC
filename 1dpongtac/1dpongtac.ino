@@ -1,4 +1,10 @@
 /*
+
+Source de base : https://www.wikidebrouillard.org/images/4/42/D1-Pong_Pong_TAC.ino
+https://www.wikidebrouillard.org/wiki/D1-Pong
+
+------
+
    Code de fonctionnement pour le jeu PONG.
    Par les petits debrouillards.
 
