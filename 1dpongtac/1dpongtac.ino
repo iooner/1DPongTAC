@@ -60,7 +60,7 @@ const CRGB  PLAYER2_COLOR = ROUGE;    // Couleur player 2
 const float BALL_SPEED = 0.3;   // Vitesse de la balle
 const float ACCELERATION = 5;   // Accelleration de la balle a chaque tir, si ACCELERATION = 10 on augmente la vitesse de 10 pourcent a chaque tir
 const int   HIT_ZONE = 10;       // Nombre de LED pendant lesquelles on peut renvoyer la balle
-const int   MAX_SCORE = 5;
+const int   MAX_SCORE = 3;
 
 const CRGB  BALL_COLOR = JAUNE; // Couleur de la balle
 
@@ -670,13 +670,13 @@ void loop() {
         fill_rainbow(leds, NUM_LEDS / 2, counter++, 7);
         FastLED.show();
         digitalWrite(BUTTON2_LED, LOW);
-        digitalWrite(BUTTON1_LED, HIGH);
+        digitalWrite(BUTTON1_LED, LOW);
       }
       else if (lastWinner == PLAYER2)
       {
         fill_rainbow(leds + NUM_LEDS / 2, NUM_LEDS / 2, counter++, 7);
         FastLED.show();
-        digitalWrite(BUTTON2_LED, HIGH);
+        digitalWrite(BUTTON2_LED, LOW);
         digitalWrite(BUTTON1_LED, LOW);
       }
 
