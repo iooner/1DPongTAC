@@ -37,6 +37,8 @@ const int BUTTON1_PIN = D6;      // Numero de branchement du premier bouton
 const int BUTTON2_PIN = D5;      // Numero de branchement du deuxieme bouton
 const int HAUT_PARLEUR_PIN = D1; // Numero de branchement du haut parleur (optionnel)
 
+const int BUTTON1_LED = D2;
+const int BUTTON2_LED = D3;
 
 /***********************
     PARAMETRES GENERAUX
@@ -49,21 +51,21 @@ const CRGB  PLAYER2_COLOR = ROUGE;    // Couleur player 2
 /***********************
      PARAMETRES PONG
  ***********************/
-const float BALL_SPEED = 0.5;   // Vitesse de la balle
-const float ACCELERATION = 8;   // Accelleration de la balle a chaque tir, si ACCELERATION = 10 on augmente la vitesse de 10 pourcent a chaque tir
-const int   HIT_ZONE = 5;       // Nombre de LED pendant lesquelles on peut renvoyer la balle
-const int   MAX_SCORE = 3;
+const float BALL_SPEED = 0.3;   // Vitesse de la balle
+const float ACCELERATION = 5;   // Accelleration de la balle a chaque tir, si ACCELERATION = 10 on augmente la vitesse de 10 pourcent a chaque tir
+const int   HIT_ZONE = 10;       // Nombre de LED pendant lesquelles on peut renvoyer la balle
+const int   MAX_SCORE = 5;
 
 const CRGB  BALL_COLOR = JAUNE; // Couleur de la balle
 
 /*******************************
      PARAMETRES TIR A LA CORDE
  *******************************/
-const float INCREMENT = 0.05;   // De combien avance la corde lorsqu'on appuie sur le bouton
+const float INCREMENT = 0.02;   // De combien avance la corde lorsqu'on appuie sur le bouton
 const float ROPE_SMOOTH = 1.0;  // Parametre servant a lisser la position de la corde
 
-const float WAVE_LENGTH = 0.2;  // Taille des ondes
-const float WAVE_SPEED =  1.0;  // Vitesse des ondes
+const float WAVE_LENGTH = 0.4;  // Taille des ondes
+const float WAVE_SPEED =  0.8;  // Vitesse des ondes
 
 
 
@@ -95,7 +97,7 @@ Player player = PLAYER1;        // Prochain player a appuyer sur son bouton
 Player lastWinner = PERSONNE;   // Dernier player a avoir gagne
 
 CRGB leds[NUM_LEDS];            // Variable representant les LEDs
-GameState gameState = START;    // Variable representant l'etat actuel du jeu
+GameState gameState = PONG;    // Variable representant l'etat actuel du jeu
 
 
 /**********************************************
@@ -162,11 +164,13 @@ void showScore()
       delay(500);
       ledColor(PLAYER1, NUM_LEDS / 2 - player1Score, NOIR);
       FastLED.show();
+      digitalWrite(BUTTON1_LED, LOW);
 
       // On allume la derniere LED pendant 0.5s
       delay(500);
       ledColor(PLAYER1, NUM_LEDS / 2 - player1Score, PLAYER1_COLOR);
       FastLED.show();
+      digitalWrite(BUTTON1_LED, HIGH);
     }
   }
   else // lastWinner == PLAYER2
@@ -177,11 +181,13 @@ void showScore()
       delay(500);
       ledColor(PLAYER2, NUM_LEDS / 2 - player2Score, NOIR);
       FastLED.show();
+      digitalWrite(BUTTON2_LED, LOW);
 
       // On allume la derniere LED pendant 0.5s
       delay(500);
       ledColor(PLAYER2, NUM_LEDS / 2 - player2Score, PLAYER2_COLOR);
       FastLED.show();
+      digitalWrite(BUTTON2_LED, HIGH);
     }
   }
 
@@ -612,6 +618,11 @@ void setup() {
   // Initialisations des boutons
   pinMode(BUTTON1_PIN, INPUT_PULLUP);
   pinMode(BUTTON2_PIN, INPUT_PULLUP);
+  pinMode(BUTTON1_LED, OUTPUT);
+  pinMode(BUTTON2_LED, OUTPUT);
+
+  digitalWrite(BUTTON1_LED, HIGH);
+  digitalWrite(BUTTON2_LED, HIGH);
 
   // Initialisation du haut parleur
   pinMode(HAUT_PARLEUR_PIN, OUTPUT);
@@ -652,11 +663,15 @@ void loop() {
       {
         fill_rainbow(leds, NUM_LEDS / 2, counter++, 7);
         FastLED.show();
+        digitalWrite(BUTTON2_LED, LOW);
+        digitalWrite(BUTTON1_LED, HIGH);
       }
       else if (lastWinner == PLAYER2)
       {
         fill_rainbow(leds + NUM_LEDS / 2, NUM_LEDS / 2, counter++, 7);
         FastLED.show();
+        digitalWrite(BUTTON2_LED, HIGH);
+        digitalWrite(BUTTON1_LED, LOW);
       }
 
       // On regarde si un temps minimim s'est ecoule et si un des boutons est appuye
