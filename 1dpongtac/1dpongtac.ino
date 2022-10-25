@@ -30,8 +30,8 @@ const CRGB ROSE  = CRGB(255, 0,   255);
 const CRGB CYAN  = CRGB(0,   255, 255);
 
 // Definition des notes de musique
-const int PONG_SOUND = 200; //380
-const int LOOSE_SOUND = 130;
+const int PONG_SOUND = 1200; //380
+const int LOOSE_SOUND = 1000;
 
 
 /******************************
@@ -103,7 +103,7 @@ Player player = PLAYER1;        // Prochain player a appuyer sur son bouton
 Player lastWinner = PERSONNE;   // Dernier player a avoir gagne
 
 CRGB leds[NUM_LEDS];            // Variable representant les LEDs
-GameState gameState = PONG;    // Variable representant l'etat actuel du jeu
+GameState gameState = START;    // Variable representant l'etat actuel du jeu
 
 
 /**********************************************
